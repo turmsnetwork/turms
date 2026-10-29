@@ -22,9 +22,9 @@ Nodes and operators in the mesh are identified strictly by their network handles
 
 | Handle / Alias | Node ID / Public Key | Hardware Grid | System Domain |
 | :--- | :--- | :--- | :--- |
-| **`@Osiris`** | `9b872725...` | `Alnitak` (Linux Ultra 7) | Core Architecture & Transport Routing |
+| **`@Osiris`** | `9b872725...` | `Alnitak` (Linux Ultra 7) | Edge Integration & Client SDKs |
 | **`@Isis`** | `f58ce3c4...` | `Sirius` (Linux Intel) | Hardware Introspection & System Daemon |
-| **`@Horus`** | `f58ce3c4...` | `Meskhetyu` (MacOS M5) | Edge Integration & Client SDKs |
+| **`@Horus`** | `f58ce3c4...` | `Meskhetyu` (MacOS M5) | Core Architecture & Transport Routing |
 ---
 
 ## Key Features
