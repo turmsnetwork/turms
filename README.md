@@ -16,7 +16,7 @@ Instead of relying on heavy distributed state machines, central trackers, corpor
 
 ---
 
-## ⚡ Core Operators & Cyber-Identities
+## ⚡ Core Operators
 
 Nodes and operators in the mesh are identified strictly by their network handles and cryptographic public keys.
 
@@ -36,17 +36,17 @@ Nodes and operators in the mesh are identified strictly by their network handles
   * **Tier 2 (Disk/Cache):** Fast local reloads (~2–5s) from NVMe/SSD storage.
   * **Tier 3 (Network Download):** Guarded fallback fetch with automatic disk space validation.
 
-* **Apple Silicon UMA Protection:** `psyche-hardware` enforces a strict 60% VRAM cap on Unified Memory Architectures (UMA), preventing system instability, OS memory pressure, and swap thrashing.
+* **Apple Silicon UMA Protection:** `psyche-hardware` enforces a 60% VRAM cap on Unified Memory Architectures (UMA), preventing system instability, OS memory pressure, and swap thrashing.
 
-* **Cryptographic Node Identity:** Every node generates its own persistent Ed25519 key pair (`~/.config/turms/node_key.pem`). Routing operates strictly via public Node IDs—no real names, IP addresses, Tailscale keys, or local file paths are exposed in public descriptors.
+* **Cryptographic Node Identity:** Every node generates its own persistent Ed25519 key pair (`~/.config/turms/node_key.pem`). Routing operates via public Node IDs—no real names, IP addresses, Tailscale keys, or local file paths are exposed in public descriptors.
 
-* **Dual-Transport Fallback:** Primary P2P transport uses Iroh QUIC; fallback transport wraps Tailcat WireGuard encrypted tunnels (`tc+` / `tcp`) for complex NAT traversal.
+* **Dual-Transport Fallback:** Primary P2P transport uses Iroh QUIC; fallback transport wraps Tailcat WireGuard encrypted tunnels (`tc+` / `tcp`) for NAT traversal.
 
-* **Real-Time Streaming & Dynamic Port Probing:** SSE chunk streaming (`--stream`) over QUIC for minimal time-to-first-token (TTFT), plus automatic backend port probing (8080, 8001, 8000, 7860, 9000, 5000) for local model servers (vLLM, llama.cpp, MLX LM).
+* **Real-Time Streaming & Dynamic Port Probing:** SSE chunk streaming (`--stream`) over QUIC for minimal time-to-first-token (TTFT), plus automatic backend port probing (8080, 8001, 8000, 7860, 9000, 5000) for local model servers (initial tests with vLLM, llama.cpp, MLX LM).
 
 ---
 
-## Example soup
+## Sample soup
 
 ```
                     ┌──────────────────────────────────────────┐
@@ -136,7 +136,7 @@ cargo test --workspace
 
 ### Provider Node (Serving Models)
 
-1. **Start your local model server** (e.g., llama.cpp server, vLLM, or MLX LM on port 8080 or 8001).
+1. **Start your local model server** (e.g., llama.cpp server, vLLM, or MLX LM e.g. on port 8080 or 8001).
 
 2. **Start `turmsd` in listener mode:**
 
@@ -211,7 +211,7 @@ discover-env.sh hw-json
 ## Security Model
 
 * **Pseudonymous Identity:** All contributor signatures and node manifests strictly use developer handles/nicknames (`@Osiris, `@Isis`, `@Horus`) and Ed25519 Node IDs.
-* **Admin Plane:** Machine-level SSH management e.g. (`tag:turms-admin`, `tag:turms-nodes`).
+* **Admin Plane:** Machine-level SSH management 
 * **Data Plane (Mesh):** All mesh routing operates via signed, public Ed25519 Node IDs (`~/.config/turms/node_key.pem`).
 * **Zero Privacy Leaks:** Peer descriptors contain no IP addresses, hostnames, absolute file paths, or private configuration metadata.
 * **Cellular Permissions:** Requests can only interface through dedicated ALPN endpoints (`/turms/inference/1` and `/turms/discovery/1`).
